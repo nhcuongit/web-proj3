@@ -2,7 +2,6 @@ from app import db
 from datetime import datetime
 
 class Attendee(db.Model):
-    __tablename__ = 'attendees'
     id = db.Column(db.Integer, primary_key=True)
     conference_id = db.Column(db.Integer, nullable=False)
     first_name = db.Column(db.Text, nullable=False)
@@ -20,7 +19,6 @@ class Attendee(db.Model):
         return "{} {}".format(self.first_name, self.last_name)
 
 class Conference(db.Model):
-    __tablename__ = 'conferences'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, nullable=False)
     active = db.Column(db.Boolean, nullable=False)
@@ -32,7 +30,6 @@ class Conference(db.Model):
         return "Conference: {}".format(self.name)
 
 class Notification(db.Model):
-    __tablename__ = 'notifications'
     id = db.Column(db.Integer, primary_key=True)
     status =  db.Column(db.Text, nullable=False)
     message =  db.Column(db.Text)
