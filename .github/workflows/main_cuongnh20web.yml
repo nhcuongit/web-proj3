@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'cuongnh20web'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F15208314F8E4ACD9A809131DBB23995 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_75E0F91F9E464A33922B86832EAA6239 }}
