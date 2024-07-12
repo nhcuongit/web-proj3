@@ -30,7 +30,8 @@ def registration():
             db.session.commit()
             session['message'] = 'Thank you, {} {}, for registering!'.format(attendee.first_name, attendee.last_name)
             return redirect('/Registration')
-        except:
+        except Exception as ex:
+            logging.error(str(ex))
             logging.error('Error occured while saving your information')
 
     else:
@@ -58,7 +59,7 @@ def notification():
         notification = Notification()
         notification.message = request.form['message']
         notification.subject = request.form['subject']
-        notification.status = 'Notifications submitted'
+        notification.status = 'Noticed 2 attendees'
         notification.submitted_date = datetime.utcnow()
 
         try:
@@ -70,8 +71,10 @@ def notification():
             queue_client.send(msg) 
 
             return redirect('/Notifications')
-        except :
+        except Exception as ex:
+            logging.error(str(ex))
             logging.error('log unable to save notification')
+            return redirect('/Notifications')
 
     else:
         return render_template('notification.html')
