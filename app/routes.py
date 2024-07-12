@@ -30,8 +30,7 @@ def registration():
             db.session.commit()
             session['message'] = 'Thank you, {} {}, for registering!'.format(attendee.first_name, attendee.last_name)
             return redirect('/Registration')
-        except Exception as ex:
-            print(str(ex))
+        except:
             logging.error('Error occured while saving your information')
 
     else:
@@ -59,7 +58,7 @@ def notification():
         notification = Notification()
         notification.message = request.form['message']
         notification.subject = request.form['subject']
-        notification.status = 'Noticed 2 attendees'
+        notification.status = 'Notifications submitted'
         notification.submitted_date = datetime.utcnow()
 
         try:
