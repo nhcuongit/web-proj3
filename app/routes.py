@@ -59,7 +59,7 @@ def notification():
         notification = Notification()
         notification.message = request.form['message']
         notification.subject = request.form['subject']
-        notification.status = 'Noticed 2 attendees'
+        notification.status = 'Notifications submitted'
         notification.submitted_date = datetime.utcnow()
 
         try:
