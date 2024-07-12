@@ -49,7 +49,9 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+    permissions:
+      id-token: write #This is required for requesting the JWT
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -60,10 +62,17 @@ jobs:
         run: unzip release.zip
 
       
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_97171F80D9814D8EBD3A3BAFEDDCBF41 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A2384419B973440F86E985711BF8C281 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9FA2A98516BF478694B4761D95B4C249 }}
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: 'cuongnh20web'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_75E0F91F9E464A33922B86832EAA6239 }}
+          
